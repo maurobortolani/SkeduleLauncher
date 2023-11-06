@@ -1,0 +1,32 @@
+SkeduleLauncher V1.0
+
+
+Di fatto durante la riproduzione della sequenza la finestra rimane bloccata, vedrò si sistemare questa cosa in un secondo momento.
+
+Utilizzo dell'applicazione
+
+L'app si presenta come una tabella.
+
+Colonna 1: "Percorso Assoluto Programma"
+Qui inserisci il percorso assoluto del programma che fai partire, ad esempio se vuoi eseguire VLC metti tutto il percorso per arrivare all'applicazione C:\Program Files\VideoLAN\VLC\vlc.exe
+
+Colonna 2: "Directory File"
+Qui inserisci la directory che contiene il file che vuoi riprodurre con VLC o qualunque altro programma scegli. in generale rappresenta la cartella dell'argomento del programma che vai ad eseguire
+
+Colonna 3: "Nome File"
+Qui inserisci il nome del file che è contenuto nella colonna 2 completo di estensione
+
+Colonna 4: "Pausa a seguire"
+In questa colonna metti i secondi di attesa prima di procedere con il passo successivo. ti consiglio di mettere comunque un valore anche nell'ultima riga della sequenza (metti 1 ad esempio)
+
+Colonna 5: "Enable"
+Ho inseirto questo flag per abilitare/disabilitare l'esecuzione della riga
+
+Pulsante Save:
+Salva un file di testo contenente tutto quello che hai scritto nella tabella
+
+Pulsante Load:
+Legge un file di testo contenente le stringhe per popolare la tabella
+
+Pulsante Run:
+Manda in esecuzione la sequenza

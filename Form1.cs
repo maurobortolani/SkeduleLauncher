@@ -5,6 +5,7 @@ namespace SkeduleLauncher
 {
     public partial class Form1 : Form
     {
+        public int indexSequence = 0;
         class ProgramToRun
         {
             public string programma;
@@ -20,35 +21,36 @@ namespace SkeduleLauncher
 
         private void buttonRun_Click(object sender, EventArgs e)
         {
-            popolaLista();
+            swichStato();
+        }
+
+        private void swichStato()
+        {
+            if (timer1.Enabled == false)
+            {
+                indexSequence = 0;
+                runNext();
+                popolaLista();
+                buttonRun.Text = "Stop";
+                buttonRun.BackColor = Color.Red;
+                //timer1.Enabled = true;
+            }
+            else
+            {
+                indexSequence = 0;
+                timer1.Enabled = false;
+                buttonRun.Text = "Run";
+                buttonRun.BackColor = Color.White;
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    row.DefaultCellStyle.BackColor = Color.White;
+                }
+            }
         }
 
         private void popolaLista()
         {
-            for (int i = 0; i < dataGridView1.RowCount; i++)
-            {
-                if (Convert.ToBoolean(dataGridView1.Rows[i].Cells["Enable"].Value) == true)
-                {
-                    try
-                    {
-                        var p = new Process
-                        {
-                            StartInfo =
-                            {
-                                FileName = dataGridView1.Rows[i].Cells["Programma"].Value.ToString(),
-                                WorkingDirectory = dataGridView1.Rows[i].Cells["WorkingDirectory"].Value.ToString(),
-                                Arguments = "\"" + dataGridView1.Rows[i].Cells["Arguments"].Value.ToString() + "\""
-                            }
-                        };
-                        p.Start();
-                        System.Threading.Thread.Sleep(Convert.ToInt32(dataGridView1.Rows[i].Cells["Pausa"].Value) * 1000);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-            }
+
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -120,6 +122,55 @@ namespace SkeduleLauncher
         private void Form1_Load(object sender, EventArgs e)
         {
             resize();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            runNext();
+        }
+
+        private void resetSequence()
+        {   
+            swichStato();
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                row.DefaultCellStyle.BackColor = Color.White;
+            }
+        }
+
+        private void runNext()
+        {
+            if (indexSequence < dataGridView1.RowCount)
+            {
+                if (Convert.ToBoolean(dataGridView1.Rows[indexSequence].Cells["Enable"].Value) == true)
+                {
+                    try
+                    {
+                        var p = new Process
+                        {
+                            StartInfo =
+                            {
+                                FileName = dataGridView1.Rows[indexSequence].Cells["Programma"].Value.ToString(),
+                                WorkingDirectory = dataGridView1.Rows[indexSequence].Cells["WorkingDirectory"].Value.ToString(),
+                                Arguments = "\"" + dataGridView1.Rows[indexSequence].Cells["Arguments"].Value.ToString() + "\""
+                            }
+                        };
+                        p.Start();
+                        dataGridView1.Rows[indexSequence].DefaultCellStyle.BackColor = Color.Green;
+                        timer1.Interval = Convert.ToInt32(dataGridView1.Rows[indexSequence].Cells["Pausa"].Value) * 1000;    
+                        timer1.Enabled = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                indexSequence++;
+            }
+            else
+            {
+                resetSequence();
+            }
         }
     }
 }

@@ -28,16 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             buttonRun = new Button();
             dataGridView1 = new DataGridView();
-            buttonSave = new Button();
-            buttonLoad = new Button();
             Programma = new DataGridViewTextBoxColumn();
             WorkingDirectory = new DataGridViewTextBoxColumn();
             Arguments = new DataGridViewTextBoxColumn();
             Pausa = new DataGridViewTextBoxColumn();
             Enable = new DataGridViewCheckBoxColumn();
+            buttonSave = new Button();
+            buttonLoad = new Button();
+            timer1 = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -62,29 +64,6 @@
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(863, 426);
             dataGridView1.TabIndex = 1;
-            // 
-            // buttonSave
-            // 
-            buttonSave.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonSave.Location = new Point(926, 10);
-            buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(75, 23);
-            buttonSave.TabIndex = 2;
-            buttonSave.Text = "Save";
-            buttonSave.UseVisualStyleBackColor = true;
-            buttonSave.Click += buttonSave_Click;
-            // 
-            // buttonLoad
-            // 
-            buttonLoad.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonLoad.Location = new Point(926, 38);
-            buttonLoad.Margin = new Padding(3, 2, 3, 2);
-            buttonLoad.Name = "buttonLoad";
-            buttonLoad.Size = new Size(75, 22);
-            buttonLoad.TabIndex = 4;
-            buttonLoad.Text = "Load";
-            buttonLoad.UseVisualStyleBackColor = true;
-            buttonLoad.Click += buttonLoad_Click;
             // 
             // Programma
             // 
@@ -121,6 +100,33 @@
             Enable.Name = "Enable";
             Enable.Width = 125;
             // 
+            // buttonSave
+            // 
+            buttonSave.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonSave.Location = new Point(926, 10);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Size = new Size(75, 23);
+            buttonSave.TabIndex = 2;
+            buttonSave.Text = "Save";
+            buttonSave.UseVisualStyleBackColor = true;
+            buttonSave.Click += buttonSave_Click;
+            // 
+            // buttonLoad
+            // 
+            buttonLoad.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonLoad.Location = new Point(926, 38);
+            buttonLoad.Margin = new Padding(3, 2, 3, 2);
+            buttonLoad.Name = "buttonLoad";
+            buttonLoad.Size = new Size(75, 22);
+            buttonLoad.TabIndex = 4;
+            buttonLoad.Text = "Load";
+            buttonLoad.UseVisualStyleBackColor = true;
+            buttonLoad.Click += buttonLoad_Click;
+            // 
+            // timer1
+            // 
+            timer1.Tick += timer1_Tick;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -150,5 +156,6 @@
         private DataGridViewTextBoxColumn Arguments;
         private DataGridViewTextBoxColumn Pausa;
         private DataGridViewCheckBoxColumn Enable;
+        private System.Windows.Forms.Timer timer1;
     }
 }
